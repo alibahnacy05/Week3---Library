@@ -12,13 +12,34 @@
         public int MemberId
         {
             get { return memberId; }
-            private set { memberId = value; } // Read-only from outside the class
+            private set
+            {
+                if (value > 0)
+                {
+                    memberId = value;
+                }
+                else
+                {
+                    Console.WriteLine("Error: Member ID must be greater than zero.");
+                }
+            }
         }
 
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set
+            {
+                // Ensure name does not contain any numbers
+                if (!value.Any(char.IsDigit) && value != "")
+                {
+                    name = value;
+                }
+                else
+                {
+                    Console.WriteLine("Error: Member name cannot be blank or contain numbers.");
+                }
+            }
         }
 
         public string Address
